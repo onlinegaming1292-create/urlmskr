@@ -6,21 +6,27 @@
 </head>
 <body>
 <script>
-var path = window.location.pathname.substring(1);
-if (path) {
-    try {
-        var originalUrl = atob(path);
-        if (originalUrl.startsWith('http')) {
-            window.location.replace(originalUrl);
-        } else {
-            document.write('Invalid URL');
+    // البحث عن النص المشفر بعد علامة ?
+    const params = new URLSearchParams(window.location.search);
+    const encodedUrl = params.get('url');
+
+    if (encodedUrl) {
+        try {
+            // فك التشفير
+            const originalUrl = atob(encodedUrl);
+            
+            // التأكد إنه رابط وتحويل المستخدم فوراً
+            if (originalUrl.startsWith('http://') || originalUrl.startsWith('https://')) {
+                window.location.replace(originalUrl);
+            } else {
+                document.write('الرابط الأصلي مش صحيح!');
+            }
+        } catch (e) {
+            document.write('حصل خطأ في فك التشفير!');
         }
-    } catch (e) {
-        document.write('Error decoding');
+    } else {
+        document.write('أهلاً بك في مخفي الروابط!');
     }
-} else {
-    document.write('Welcome to my URL Masker');
-}
 </script>
 </body>
 </html>
