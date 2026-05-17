@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+</head>
+<body>
+<script>
+var path = window.location.pathname.substring(1);
+if (path) {
+    try {
+        var originalUrl = atob(path);
+        if (originalUrl.startsWith('http')) {
+            window.location.replace(originalUrl);
+        } else {
+            document.write('Invalid URL');
+        }
+    } catch (e) {
+        document.write('Error decoding');
+    }
+} else {
+    document.write('Welcome to my URL Masker');
+}
+</script>
+</body>
+</html>
